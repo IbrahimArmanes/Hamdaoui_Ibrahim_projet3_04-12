@@ -29,7 +29,7 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", user.getEmail());
         claims.put("name", user.getName());
-        
+        claims.put("id", user.getId());
         return createToken(claims, user.getEmail());
     }
 
@@ -78,4 +78,9 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
     }
+    public Integer extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("id", Integer.class));
+    }
 }
+
+

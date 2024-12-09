@@ -1,5 +1,7 @@
 package com.openclassrooms.projet3.model;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,6 +31,8 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -59,4 +63,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
