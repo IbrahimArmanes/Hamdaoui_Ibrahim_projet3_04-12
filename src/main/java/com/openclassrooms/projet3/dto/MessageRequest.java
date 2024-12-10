@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class MessageRequest {
-    @JsonProperty("userId")
+    @JsonProperty("user_id")
     private Long userId;
     
-    @JsonProperty("rentalId")
+    @JsonProperty("rental_id")
     private Long rentalId;
     
     private String message;

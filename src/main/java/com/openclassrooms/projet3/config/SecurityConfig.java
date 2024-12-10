@@ -2,7 +2,6 @@ package com.openclassrooms.projet3.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -35,6 +34,7 @@ public class SecurityConfig {
                   .requestMatchers("/api/messages").authenticated()
                   .requestMatchers("/api/rentals/**").authenticated()
                   .requestMatchers("/api/user/**").authenticated()
+                  .requestMatchers("/images/**").permitAll()
                   .anyRequest().authenticated()
               )
               .sessionManagement(session -> session

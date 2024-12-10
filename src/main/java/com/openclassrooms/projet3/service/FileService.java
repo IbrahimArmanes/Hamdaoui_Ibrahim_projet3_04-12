@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileService {
-    private final Path root = Paths.get("src/main/resources/static/images");
+    private final Path root = Paths.get("uploads/images");
 
     public String saveFile(MultipartFile file) throws Exception {
         try {
@@ -20,7 +20,7 @@ public class FileService {
             
             String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
             Files.copy(file.getInputStream(), root.resolve(filename));
-            return "/images/" + filename;
+            return "http://localhost:3001/images/" + filename;
         } catch (Exception e) {
             throw new Exception("Could not store the file. Error: " + e.getMessage());
         }
