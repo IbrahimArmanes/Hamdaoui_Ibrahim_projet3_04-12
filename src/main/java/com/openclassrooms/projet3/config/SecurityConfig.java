@@ -35,6 +35,11 @@ public class SecurityConfig {
                   .requestMatchers("/api/rentals/**").authenticated()
                   .requestMatchers("/api/user/**").authenticated()
                   .requestMatchers("/images/**").permitAll()
+                  //Swagger UI access
+                  .requestMatchers("/swagger-ui/**").permitAll()
+                  .requestMatchers("/v3/api-docs/**").permitAll()
+                  .requestMatchers("/swagger-ui.html").permitAll()
+                  .requestMatchers("/api-docs/**").permitAll()
                   .anyRequest().authenticated()
               )
               .sessionManagement(session -> session

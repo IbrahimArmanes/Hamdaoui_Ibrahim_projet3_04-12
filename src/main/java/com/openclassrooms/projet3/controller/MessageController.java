@@ -13,19 +13,30 @@ import com.openclassrooms.projet3.model.User;
 import com.openclassrooms.projet3.service.MessageService;
 import com.openclassrooms.projet3.service.RentalService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Messages", description = "APIs for managing rental messages")
 @RequiredArgsConstructor
 public class MessageController {
     private final MessageService messageService;
     private final RentalService rentalService;
     
+    @Operation(summary = "Create new message", description = "Creates a new message for a rental")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Message created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid message data")
+    })
     @PostMapping("/messages")
     public ResponseEntity<Message> createMessage(
-        @RequestBody MessageRequest messageRequest, 
-        @AuthenticationPrincipal User user) {
+        @RequestBody @Valid MessageRequest messageRequest, 
+        @Parameter(hidden = true) @AuthenticationPrincipal User user) {
         
         Message message = Message.builder()
             .message(messageRequest.getMessage())
