@@ -1,6 +1,5 @@
 package com.openclassrooms.projet3.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
