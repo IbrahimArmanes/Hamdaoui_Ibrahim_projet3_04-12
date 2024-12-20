@@ -19,6 +19,7 @@ public class RegisterService implements IRegisterService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     
+    // Handles user registration and returns JWT token
     @Override
     public RegisterResponse register(RegisterRequest request) {
         if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {

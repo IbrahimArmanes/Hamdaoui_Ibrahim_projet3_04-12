@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MessageService implements IMessageService {
     private final MessageRepository messageRepository;
+
+    // Saves new message to database
     @Override
     public Message saveMessage(Message message) {
         return messageRepository.save(message);

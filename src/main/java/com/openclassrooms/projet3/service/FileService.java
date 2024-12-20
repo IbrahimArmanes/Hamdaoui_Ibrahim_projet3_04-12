@@ -13,6 +13,7 @@ import com.openclassrooms.projet3.interfaces.IFileService;
 @Service
 public class FileService implements IFileService {
     private final Path root = Paths.get("uploads/images");
+    // Saves uploaded file and returns URL
     @Override
     public String saveFile(MultipartFile file) throws Exception {
         try {

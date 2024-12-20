@@ -19,6 +19,7 @@ public class LoginService implements ILoginService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final JwtService jwtService;
+    // Authenticates user and generates JWT token
     @Override
     public LoginResponse login(LoginRequest request) {
         try {

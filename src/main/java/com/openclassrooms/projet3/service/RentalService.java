@@ -20,6 +20,7 @@ public class RentalService implements IRentalService {
     private final RentalRepository rentalRepository;
     private final FileService fileService;
     @Override
+    // Creates new rental with uploaded picture
     public Rental createRental(String name, Double surface, Double price, String description, MultipartFile picture, Integer userId) 
     throws Exception {
         String picturePath = fileService.saveFile(picture);
@@ -33,18 +34,24 @@ public class RentalService implements IRentalService {
             .owner_id(userId)
             .build());
     }
+
     @Override
+    // Retrieves all available rentals
     public RentalResponse getAllRentals() {
         RentalResponse response = new RentalResponse("Affichage ok");
         response.setRentals(rentalRepository.findAll());
         return response;
     }
+
     @Override
+    // Finds rental by its ID
     public Rental getRentalById(Long id) {
         return rentalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Rental not found"));
     }
+
     @Override
+    // Updates existing rental information
     public RentalUpdateResponse updateRental(Long id, RentalUpdateRequest request) {
         Rental rental = rentalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Rental not found"));
@@ -68,5 +75,4 @@ public class RentalService implements IRentalService {
             throw new RuntimeException("Error updating rental: " + e.getMessage());
         }
     }
-
 }
