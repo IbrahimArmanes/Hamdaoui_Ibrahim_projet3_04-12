@@ -3,16 +3,18 @@ package com.openclassrooms.projet3.service;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.projet3.dto.UserDTO;
+import com.openclassrooms.projet3.interfaces.IUserService;
 import com.openclassrooms.projet3.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IUserService {
 
     private final UserRepository userRepository;
 
+    @Override
     public UserDTO getUserByEmail(String email) {
         return userRepository.findByEmail(email)
             .map(user -> UserDTO.builder()
@@ -22,7 +24,8 @@ public class UserService {
                 .build())
             .orElseThrow(() -> new RuntimeException("User not found"));
     }
-
+    
+    @Override
     public UserDTO getUserById(Long id) {
         return userRepository.findById(id)
             .map(user -> UserDTO.builder()

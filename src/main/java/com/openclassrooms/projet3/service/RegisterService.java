@@ -3,6 +3,7 @@ package com.openclassrooms.projet3.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.projet3.interfaces.IRegisterService;
 import com.openclassrooms.projet3.model.RegisterRequest;
 import com.openclassrooms.projet3.model.RegisterResponse;
 import com.openclassrooms.projet3.model.User;
@@ -12,12 +13,13 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterService {
+public class RegisterService implements IRegisterService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     
+    @Override
     public RegisterResponse register(RegisterRequest request) {
         if (request.getName() == null || request.getEmail() == null || request.getPassword() == null) {
             return new RegisterResponse();

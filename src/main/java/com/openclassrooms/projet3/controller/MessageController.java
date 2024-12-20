@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.projet3.dto.MessageRequest;
+import com.openclassrooms.projet3.interfaces.IMessageService;
+import com.openclassrooms.projet3.interfaces.IRentalService;
 import com.openclassrooms.projet3.model.Message;
 import com.openclassrooms.projet3.model.User;
-import com.openclassrooms.projet3.service.MessageService;
-import com.openclassrooms.projet3.service.RentalService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -25,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Messages", description = "APIs for managing rental messages")
 @RequiredArgsConstructor
 public class MessageController {
-    private final MessageService messageService;
-    private final RentalService rentalService;
+    private final IMessageService messageService;
+    private final IRentalService rentalService;
     
     @Operation(summary = "Create new message", description = "Creates a new message for a rental")
     @ApiResponses({

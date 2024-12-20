@@ -5,6 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
+import com.openclassrooms.projet3.interfaces.ILoginService;
 import com.openclassrooms.projet3.model.LoginRequest;
 import com.openclassrooms.projet3.model.LoginResponse;
 import com.openclassrooms.projet3.repository.UserRepository;
@@ -13,12 +14,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+public class LoginService implements ILoginService {
     
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final JwtService jwtService;
-
+    @Override
     public LoginResponse login(LoginRequest request) {
         try {
             authenticationManager.authenticate(

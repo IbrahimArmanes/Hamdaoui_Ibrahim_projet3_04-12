@@ -8,10 +8,12 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
-public class FileService {
-    private final Path root = Paths.get("uploads/images");
+import com.openclassrooms.projet3.interfaces.IFileService;
 
+@Service
+public class FileService implements IFileService {
+    private final Path root = Paths.get("uploads/images");
+    @Override
     public String saveFile(MultipartFile file) throws Exception {
         try {
             if (!Files.exists(root)) {

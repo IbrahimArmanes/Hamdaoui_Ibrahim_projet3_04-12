@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.openclassrooms.projet3.interfaces.ILoginService;
+import com.openclassrooms.projet3.interfaces.IRegisterService;
 import com.openclassrooms.projet3.model.LoginRequest;
 import com.openclassrooms.projet3.model.LoginResponse;
 import com.openclassrooms.projet3.model.RegisterRequest;
 import com.openclassrooms.projet3.model.RegisterResponse;
-import com.openclassrooms.projet3.service.LoginService;
-import com.openclassrooms.projet3.service.RegisterService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,8 +26,8 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Authentication", description = "APIs for user registration and authentication")
 @RequiredArgsConstructor
 public class RegisterController {
-    private final LoginService loginService;
-    private final RegisterService authService;
+    private final ILoginService loginService;
+    private final IRegisterService authService;
 
     @Operation(summary = "Register new user", description = "Creates a new user account")
     @ApiResponses({

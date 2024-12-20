@@ -8,6 +8,7 @@ import java.util.function.Function;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.projet3.config.JwtProperties;
+import com.openclassrooms.projet3.interfaces.IJwtService;
 import com.openclassrooms.projet3.model.User;
 
 import io.jsonwebtoken.Claims;
@@ -16,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
 @Service
-public class JwtService {
+public class JwtService implements IJwtService {
 
     private final JwtProperties jwtProperties;
 
@@ -25,6 +26,7 @@ public class JwtService {
     }
 
     // Generate token for user
+    @Override
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", user.getEmail());
@@ -48,6 +50,7 @@ public class JwtService {
     }
 
     // Validate token
+    @Override
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
@@ -61,6 +64,7 @@ public class JwtService {
     }
 
     // Extract email from token
+    @Override
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }

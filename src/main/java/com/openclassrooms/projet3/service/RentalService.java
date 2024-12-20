@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.openclassrooms.projet3.dto.RentalResponse;
 import com.openclassrooms.projet3.dto.RentalUpdateRequest;
 import com.openclassrooms.projet3.dto.RentalUpdateResponse;
+import com.openclassrooms.projet3.interfaces.IRentalService;
 import com.openclassrooms.projet3.model.Rental;
 import com.openclassrooms.projet3.repository.RentalRepository;
 
@@ -15,10 +16,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class RentalService {
+public class RentalService implements IRentalService {
     private final RentalRepository rentalRepository;
     private final FileService fileService;
-    
+    @Override
     public Rental createRental(String name, Double surface, Double price, String description, MultipartFile picture, Integer userId) 
     throws Exception {
         String picturePath = fileService.saveFile(picture);
@@ -32,16 +33,18 @@ public class RentalService {
             .owner_id(userId)
             .build());
     }
-    
+    @Override
     public RentalResponse getAllRentals() {
         RentalResponse response = new RentalResponse("Affichage ok");
         response.setRentals(rentalRepository.findAll());
         return response;
     }
+    @Override
     public Rental getRentalById(Long id) {
         return rentalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Rental not found"));
     }
+    @Override
     public RentalUpdateResponse updateRental(Long id, RentalUpdateRequest request) {
         Rental rental = rentalRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Rental not found"));

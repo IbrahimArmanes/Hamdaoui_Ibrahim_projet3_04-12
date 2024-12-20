@@ -17,9 +17,9 @@ import com.openclassrooms.projet3.dto.MessageResponse;
 import com.openclassrooms.projet3.dto.RentalResponse;
 import com.openclassrooms.projet3.dto.RentalUpdateRequest;
 import com.openclassrooms.projet3.dto.RentalUpdateResponse;
+import com.openclassrooms.projet3.interfaces.IJwtService;
+import com.openclassrooms.projet3.interfaces.IRentalService;
 import com.openclassrooms.projet3.model.Rental;
-import com.openclassrooms.projet3.service.JwtService;
-import com.openclassrooms.projet3.service.RentalService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,8 +31,8 @@ import lombok.RequiredArgsConstructor;
 @Tag(name = "Rentals", description = "APIs for managing rental properties")
 @RequiredArgsConstructor
 public class RentalController {
-    private final RentalService rentalService;
-    private final JwtService jwtService;
+    private final IRentalService rentalService;
+    private final IJwtService jwtService;
 
     @Operation(summary = "Get all rentals", description = "Retrieves a list of all available rentals")
     @GetMapping("/rentals")
